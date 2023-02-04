@@ -1,4 +1,3 @@
-
 import {StyleSheet, Platform} from 'react-native';
 import colors from '../../constants/colors';
 import fonts from '../../constants/fonts';
@@ -14,18 +13,20 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
     fontWeight: '400',
     letterSpacing: 0.03,
-    lineHeight: 17,
+    lineHeight: 20,
   },
   inputContainer: {
     borderRadius: 10,
     flexDirection: 'row',
     marginTop: verticalScale(4.65),
-    borderWidth: 2,
-    shadowOpacity: 0.2,
+    borderWidth: 1,
+    shadowOpacity: 0.15,
     shadowRadius: 3,
-    elevation: 5,
+    elevation: 3,
     backgroundColor: colors.White,
     borderColor: colors.borderColor,
+    shadowColor: colors.Black,
+    shadowOffset: {width: 0, height: 1},
   },
   inputView: {
     width: '85%',
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(15),
     fontWeight: '700',
     letterSpacing: 0.02,
-    lineHeight: 19,
+    lineHeight: 20,
   },
   inputIcon: {
     paddingVertical:

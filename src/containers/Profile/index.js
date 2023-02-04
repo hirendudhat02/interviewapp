@@ -5,9 +5,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  Alert,
   Modal,
-  Dimensions,
 } from 'react-native';
 import ContentView from '../../components/ContentView';
 import {
@@ -19,7 +17,6 @@ import {
   folder,
 } from '../../constants/assets';
 import {moderateScale} from '../../helpers/ResponsiveFonts';
-import colors from '../../constants/colors';
 import styles from './styles';
 import PrimaryButton from '../../components/Button/PrimaryButton';
 import {useDispatch, useSelector} from 'react-redux';
@@ -28,9 +25,7 @@ import {useIsFocused} from '@react-navigation/native';
 import {loaderAction} from '../../redux/Action/LoaderAction';
 import Loader from '../../helpers/loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import ImagePicker from 'react-native-image-crop-picker';
 import * as Imagepicker from 'react-native-image-picker';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const ProfileScreen = ({navigation}) => {
   const [profileData, setProfileData] = useState({});
   const [model, setmodel] = useState(false);
@@ -58,6 +53,8 @@ const ProfileScreen = ({navigation}) => {
     Imagepicker.launchImageLibrary({
       mediaType: 'photo',
       selectionLimit: 1,
+      maxWidth: 300,
+      maxHeight: 400,
     })
       .then(async image => {
         setImage(image.assets[0].uri);
@@ -68,9 +65,9 @@ const ProfileScreen = ({navigation}) => {
       });
   };
   const openCamera = () => {
-    ImagePicker.openCamera({
-      width: 300,
-      height: 400,
+    Imagepicker.launchCamera({
+      maxWidth: 300,
+      maxHeight: 400,
       cropping: true,
     }).then(image => {
       setImage(image.path);
@@ -149,28 +146,28 @@ const ProfileScreen = ({navigation}) => {
         visible={model}
         onRequestClose={() => setmodel(false)}>
         <View style={styles.modacontainer}>
-          <TouchableWithoutFeedback onPress={() => setmodel(false)}>
-            <View style={styles.subview}>
-              <View style={styles.iconview}>
-                <TouchableOpacity
-                  style={styles.camaraview}
-                  onPress={() => openCamera()}>
-                  <View style={styles.imageview}>
-                    <Image source={camera} style={styles.image} />
-                  </View>
-                  <Text style={styles.modaltxt}>Open Camera</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.camaraview}
-                  onPress={() => chooseFile()}>
-                  <View style={styles.imageview}>
-                    <Image source={folder} style={styles.image} />
-                  </View>
-                  <Text style={styles.modaltxt}>Choose File</Text>
-                </TouchableOpacity>
-              </View>
+          {/* <TouchableWithoutFeedback onPress={() => setmodel(false)}> */}
+          <View style={styles.subview}>
+            <View style={styles.iconview}>
+              <TouchableOpacity
+                style={styles.camaraview}
+                onPress={() => openCamera()}>
+                <View style={styles.imageview}>
+                  <Image source={camera} style={styles.image} />
+                </View>
+                <Text style={styles.modaltxt}>Open Camera</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.camaraview}
+                onPress={() => chooseFile()}>
+                <View style={styles.imageview}>
+                  <Image source={folder} style={styles.image} />
+                </View>
+                <Text style={styles.modaltxt}>Choose File</Text>
+              </TouchableOpacity>
             </View>
-          </TouchableWithoutFeedback>
+          </View>
+          {/* </TouchableWithoutFeedback> */}
         </View>
       </Modal>
     </View>
