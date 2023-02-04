@@ -1,0 +1,7 @@
+export const LOADER = 'LOADER';
+
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_RESPONSE = 'LOGIN_RESPONSE';
+
+export const PROFILE_REQUEST = 'PROFILE_REQUEST';
+export const PROFILE_RESPONSE = 'PROFILE_RESPONSE';
